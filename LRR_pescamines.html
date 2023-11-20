@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Open+Sans:wght@500&display=swap');
+
+        .btn-joc {
+            display: block;
+            margin:auto;
+            text-align:center;
+            background-color:#7ED348;
+            border-radius: 8px;
+            border:none;
+            padding:15px;
+            color:#000;
+            font-size:20px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
         #taulell{
             margin: auto;
             padding:50px 80px;
@@ -26,7 +42,7 @@
     </style>
 </head>
 <body>
-    <button onclick="iniciarPartida()">Iniciar Partida</button>
+    <button onclick="iniciarPartida()" class="btn-joc">Iniciar Partida</button>
     <div id="taulell"></div>
 </body>
 </html>
