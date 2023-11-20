@@ -2,8 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="LRR_pescamines.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #taulell{
+            margin: auto;
+            /*width: 300px;*/ /* Ajusta el ancho según sea necesario */
+            padding:50px 80px;
+            /*border: 2px solid red;*/
+            display: grid;
+            grid-template-columns: repeat(var(--numCols, 10), 38px); /* Define el número de columnas */
+            gap: 1px; /* Espacio entre celdas */
+            justify-content: center;
+        }
+
+        .cell {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #ccc;
+            text-align: center;
+            line-height: 35px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <button onclick="iniciarPartida()">Iniciar Partida</button>
