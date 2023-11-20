@@ -9,7 +9,7 @@ let minesPositions = [];
 
 
 function iniciarPartida(){
-
+    //RESET DE VARIABLES. 
     minesPositions = []; 
     
     numRows = prompt('Introdueix el num de files (DE 10 A 30):');
@@ -31,45 +31,45 @@ function crearTaulell(){
     const taulell = document.getElementById('taulell');
     taulell.innerHTML = ''; // RESET EL TAULELL
 
+    taulell.style.setProperty('--numCols', numCols); 
+
+    let htmlContent = '';
+
     for (let i = 0; i < numRows; i++) {
         for (let j = 0; j < numCols; j++) {
-            let cell = document.createElement('div');
-            cell.className = 'cell';
-            cell.dataset.x = i;
-            cell.dataset.y = j;
-            cell.dataset.mina = 'false';
-            cell.style.backgroundColor = '#ccc';
-            cell.style.border = '1px solid blue';
-            cell.style.margin = '2px';
-            cell.addEventListener('click', obreCasella);
-            taulell.appendChild(cell);
+            htmlContent += `
+                <div class="cell" data-x="${i}" data-y="${j}" data-mina="false" data-num-mines="0"
+                     style="background-color: #ccc; border: 1px solid blue; margin: 2px;"
+                     onclick="obreCasella(event)">
+                </div>`;
         }
     }
+
+    taulell.innerHTML = htmlContent;
+
     setMines();    
 }
 
 function obreCasella(event) {
     const clickedCell = event.target;
-      x = parseInt(clickedCell.dataset.x);
-      y = parseInt(clickedCell.dataset.y);
+    x = parseInt(clickedCell.dataset.x);
+    y = parseInt(clickedCell.dataset.y);
 
     console.log("CLICK A " + x + ", " + y );
 }
 
 function setMines(){
-      totalPescamines = numRows * numCols;
-      // EL 17%. 
-      minesCount = Math.ceil(0.17 * totalPescamines); 
+    totalPescamines = numRows * numCols;
+    // EL 17%. 
+    minesCount = Math.ceil(0.17 * totalPescamines); 
   
-      const cells = document.querySelectorAll('.cell');
-      const cellsArray = Array.from(cells);
-      //RESET DE MINES POSITIONS. 
-      minesPositions = []; 
-  
-      //ASSIGNAR MINES. 
+    const cells = document.querySelectorAll('.cell');
+    const cellsArray = Array.from(cells);
 
-      
-      console.log("TOTES LES MINES: ", minesPositions);
+    //ASSIGNAR MINES. 
+
+
+    console.log("TOTES LES MINES: ", minesPositions);
 }
 
 function calculaAdjacents(){
@@ -83,3 +83,10 @@ function esMina(x,y){
 function setMinesAdjacents(x, y, minesCount){
 
 }
+
+/*
+    Al destapar un zero (NO MINA) s'han de obrir totes les caselles del voltant
+    i s'hi ha una altra adjacent amb zero repetir el procés amb la que s'esta a zero del costat
+
+    Al acabar el joc s'ha de deactivar el click de les caselles restants.
+*/
