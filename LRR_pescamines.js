@@ -14,6 +14,15 @@ let minesPositions = [];
 //let cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 //let cells = document.querySelectorAll('.cell');
 
+/* -------------CANVIAR IMATGE NO EM SURT--------------
+
+let cell = document.querySelectorAll('.cell');
+cell.onclick = function(){
+    cellimg.src = "./badera20px.jpg";
+}
+*/
+
+
 function iniciarPartida(){
     //RESET DE VARIABLES. 
     minesPositions = []; 
@@ -42,8 +51,8 @@ function crearTaulell(){
 
     for (let i = 0; i < numRows; i++) {
         for (let j = 0; j < numCols; j++) {
-            htmlContent += `
-                <div class="cell" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"></div>`;
+            htmlContent += 
+            `<div class="cell" id="cellimg" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"></div>`;
         }
     }
 
@@ -59,7 +68,6 @@ function obreCasella(event) {
 
     console.log("CLICK A " + x + ", " + y );
     esMina(x,y);
-    //DESACTIVAR DES D'AQUI 
 }
 
 function setMines(){
@@ -94,7 +102,8 @@ function esMina(x,y){
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 
     if(cell.dataset.mina === 'true'){
-        console.log("NO MINA: " + x, y);
+        console.log("HI HA MINA: " + x, y);
+        acabat();
         return cell.dataset.mina === 'true';
     }
     else{
@@ -107,6 +116,11 @@ function esMina(x,y){
 function setMinesAdjacents(x, y, minesCount){
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
     cell.dataset.numMines = nMinesAdjacents;
+}
+
+function acabat(){
+    console.log("Trukutru");
+    //AQUI ARRIBA, LLAVORS DONCS, AQUI NO SÉ QUE HEM DE POSAR EXACTAMENT. 
 }
 
 /*
