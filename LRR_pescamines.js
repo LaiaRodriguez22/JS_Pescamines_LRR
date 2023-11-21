@@ -3,10 +3,11 @@ let y;
 let numRows;
 let numCols;
 let totalPescamines;
-
-let minesCount;
+let nMinesAdjacents;
 let minesPositions = [];
 
+let cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+let cells = document.querySelectorAll('.cell');
 
 function iniciarPartida(){
     //RESET DE VARIABLES. 
@@ -25,6 +26,7 @@ function iniciarPartida(){
     //console.log("NUM COLS: " + numCols);
 
     crearTaulell();
+
 }
 
 function crearTaulell(){
@@ -56,32 +58,55 @@ function obreCasella(event) {
     y = parseInt(clickedCell.dataset.y);
 
     console.log("CLICK A " + x + ", " + y );
+    esMina(x,y);
+    //DESACTIVAR DES D'AQUI 
 }
 
 function setMines(){
-    totalPescamines = numRows * numCols;
+    let totalCells = numRows * numCols;
     // EL 17%. 
-    minesCount = Math.ceil(0.17 * totalPescamines); 
-  
-    const cells = document.querySelectorAll('.cell');
-    const cellsArray = Array.from(cells);
+    let minesCount = Math.ceil(0.17 * totalCells); 
+    //ARRAY QUE GUARDA LES POS DE LES MINES. 
+    let minesPositions = []; 
 
-    //ASSIGNAR MINES. 
+    //AGAFES TOTS ELS DIVS ANOMENATS CELL. 
+    let cells = document.querySelectorAll('.cell');
+    let cellsArray = Array.from(cells);
 
+    for (let i = 0; i < minesCount; i++) {
+        let randomIndex = Math.floor(Math.random() * cellsArray.length);
+        let cell = cellsArray[randomIndex];
 
+        cell.dataset.mina = 'true';
+        minesPositions.push({ x: parseInt(cell.dataset.x), y: parseInt(cell.dataset.y) });
+    }
+
+    //IMPRIMEIX ARRAY DE POS DE TOTES LES MINES
     console.log("TOTES LES MINES: ", minesPositions);
 }
 
 function calculaAdjacents(){
-
+    //LA HE FET GLOBAL: const cells = document.querySelectorAll('.cell');
+    
 }
 
 function esMina(x,y){
+    //LA HE FET GLOBAL: const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 
+    if(cell.dataset.mina === 'true'){
+        console.log("ETS A LA CELA I ES MINA: " + x, y);
+        return cell.dataset.mina === 'true';
+    }
+    else{
+        console.log("ETS A LA CELA I nooooooo MINA: " + x, y);
+        console.log("AQUI TORNARIES A CRIDAR AL CALCULA ADJ??");
+        return cell.dataset.mina === 'false';
+    }
 }
 
 function setMinesAdjacents(x, y, minesCount){
-
+    //LA HE FET GLOBAL: const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+    cell.dataset.numMines = nMinesAdjacents;
 }
 
 /*
