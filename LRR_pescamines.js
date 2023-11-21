@@ -18,7 +18,7 @@ let minesPositions = [];
 
 let cell = document.querySelectorAll('.cell');
 cell.onclick = function(){
-    cellimg.src = "./badera20px.jpg";
+    cellimg.src = "./bandera20px.jpg";
 }
 */
 
