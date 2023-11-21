@@ -1,13 +1,18 @@
+let numMax = 30;
+let numMin = 10;
+
 let x;
 let y;
+
 let numRows;
 let numCols;
+
 let totalPescamines;
 let nMinesAdjacents;
 let minesPositions = [];
 
-let cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
-let cells = document.querySelectorAll('.cell');
+//let cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+//let cells = document.querySelectorAll('.cell');
 
 function iniciarPartida(){
     //RESET DE VARIABLES. 
@@ -17,10 +22,10 @@ function iniciarPartida(){
     numCols = prompt('Introduce el número de columnas (DE 10 A 30):');
 
     // NUM DE FILES.
-    numRows = Math.max(10, Math.min(30, parseInt(numRows))) || 10;
+    numRows = Math.max(numMin, Math.min(numMax, parseInt(numRows))) || numMin;
 
     // NUM COLUMNES.
-    numCols = Math.max(10, Math.min(30, parseInt(numCols))) || 10;
+    numCols = Math.max(numMin, Math.min(numMax, parseInt(numCols))) || numMin;
 
     //console.log("NUM FILES: " + numRows);
     //console.log("NUM COLS: " + numCols);
@@ -40,10 +45,7 @@ function crearTaulell(){
     for (let i = 0; i < numRows; i++) {
         for (let j = 0; j < numCols; j++) {
             htmlContent += `
-                <div class="cell" data-x="${i}" data-y="${j}" data-mina="false" data-num-mines="0"
-                     style="background-color: #ccc; border: 1px solid blue; margin: 2px;"
-                     onclick="obreCasella(event)">
-                </div>`;
+                <div class="cell" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"></div>`;
         }
     }
 
@@ -70,15 +72,15 @@ function setMines(){
     let minesPositions = []; 
 
     //AGAFES TOTS ELS DIVS ANOMENATS CELL. 
-    let cells = document.querySelectorAll('.cell');
-    let cellsArray = Array.from(cells);
+    let cellsDocument = document.querySelectorAll('.cell');
+    let cellsArray = Array.from(cellsDocument);
 
     for (let i = 0; i < minesCount; i++) {
         let randomIndex = Math.floor(Math.random() * cellsArray.length);
-        let cell = cellsArray[randomIndex];
+        let cellArray = cellsArray[randomIndex];
 
-        cell.dataset.mina = 'true';
-        minesPositions.push({ x: parseInt(cell.dataset.x), y: parseInt(cell.dataset.y) });
+        cellArray.dataset.mina = 'true';
+        minesPositions.push({ x: parseInt(cellArray.dataset.x), y: parseInt(cellArray.dataset.y) });
     }
 
     //IMPRIMEIX ARRAY DE POS DE TOTES LES MINES
@@ -86,12 +88,12 @@ function setMines(){
 }
 
 function calculaAdjacents(){
-    //LA HE FET GLOBAL: const cells = document.querySelectorAll('.cell');
+    const cells = document.querySelectorAll('.cell');
     
 }
 
 function esMina(x,y){
-    //LA HE FET GLOBAL: const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+    const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 
     if(cell.dataset.mina === 'true'){
         console.log("ETS A LA CELA I ES MINA: " + x, y);
@@ -105,7 +107,7 @@ function esMina(x,y){
 }
 
 function setMinesAdjacents(x, y, minesCount){
-    //LA HE FET GLOBAL: const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+    const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
     cell.dataset.numMines = nMinesAdjacents;
 }
 
