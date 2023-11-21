@@ -38,8 +38,6 @@ function crearTaulell(){
     const taulell = document.getElementById('taulell');
     taulell.innerHTML = ''; // RESET EL TAULELL
 
-    taulell.style.setProperty('--numCols', numCols); 
-
     let htmlContent = '';
 
     for (let i = 0; i < numRows; i++) {
@@ -96,11 +94,11 @@ function esMina(x,y){
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 
     if(cell.dataset.mina === 'true'){
-        console.log("ETS A LA CELA I ES MINA: " + x, y);
+        console.log("NO MINA: " + x, y);
         return cell.dataset.mina === 'true';
     }
     else{
-        console.log("ETS A LA CELA I nooooooo MINA: " + x, y);
+        console.log("NOOOO MINA : " + x, y);
         console.log("AQUI TORNARIES A CRIDAR AL CALCULA ADJ??");
         return cell.dataset.mina === 'false';
     }
