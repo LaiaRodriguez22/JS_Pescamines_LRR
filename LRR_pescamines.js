@@ -11,6 +11,8 @@ let totalPescamines;
 let nMinesAdjacents;
 let minesPositions = [];
 
+let guanyat=false;
+
 //let cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 //let cells = document.querySelectorAll('.cell');
 
@@ -40,6 +42,9 @@ function iniciarPartida(){
     //console.log("NUM COLS: " + numCols);
 
     crearTaulell();
+    if(guanyat=='true'){
+        acabat(guanyat);
+    }
 
 }
 
@@ -49,12 +54,18 @@ function crearTaulell(){
 
     let htmlContent = '';
 
+    `<tbody>`
     for (let i = 0; i < numRows; i++) {
+        `<tr>`
         for (let j = 0; j < numCols; j++) {
             htmlContent += 
-            `<div class="cell" id="cellimg" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"></div>`;
+            `<td>
+            <img src="fons20px.jpg" class="cell" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"/>
+            </td>`;
         }
+        `</tr>`
     }
+    `</tbody>`
 
     taulell.innerHTML = htmlContent;
 
@@ -103,6 +114,7 @@ function esMina(x,y){
 
     if(cell.dataset.mina === 'true'){
         console.log("HI HA MINA: " + x, y);
+        cell.innerHTML.
         acabat();
         return cell.dataset.mina === 'true';
     }
@@ -113,14 +125,18 @@ function esMina(x,y){
     }
 }
 
-function setMinesAdjacents(x, y, minesCount){
+function setMinesAdjacents(x, y){
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
-    cell.dataset.numMines = nMinesAdjacents;
 }
 
-function acabat(){
-    console.log("Trukutru");
-    //AQUI ARRIBA, LLAVORS DONCS, AQUI NO SÉ QUE HEM DE POSAR EXACTAMENT. 
+function acabat(guanyat){
+    if(guanyat){
+        console.log("has guanyat");
+    }
+    else{
+        console.log("has perdut");
+    }
+    //AQUI LLAVORS DONCS, AQUI NO SÉ QUE HEM DE POSAR EXACTAMENT. 
 }
 
 /*
