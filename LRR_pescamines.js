@@ -77,7 +77,8 @@ function obreCasella(event) {
     y = parseInt(clickedCell.dataset.y);
 
     console.log("CLICK A " + x + ", " + y );
-    esMina(x,y);
+    //esMina(x,y);
+    esMina(x, y);
 }
 
 function setMines(){
@@ -113,6 +114,8 @@ function esMina(x,y){
 
     if(cell.dataset.mina === 'true'){
         console.log("HI HA MINA: " + x, y);
+        //const imgElement = cell.querySelector('img');
+        //imgElement.src = "mina20px.jpg";
         acabat(guanyat);
         return cell.dataset.mina === 'true';
     }
