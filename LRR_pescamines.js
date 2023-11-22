@@ -28,6 +28,7 @@ cell.onclick = function(){
 function iniciarPartida(){
     //RESET DE VARIABLES. 
     minesPositions = []; 
+    guanyat=false;
     
     numRows = prompt('Introdueix el num de files (DE 10 A 30):');
     numCols = prompt('Introduce el número de columnas (DE 10 A 30):');
@@ -54,19 +55,17 @@ function crearTaulell(){
 
     let htmlContent = '';
 
-    `<tbody>`
     for (let i = 0; i < numRows; i++) {
-        `<tr>`
+        htmlContent += "<tr>";
         for (let j = 0; j < numCols; j++) {
             htmlContent += 
             `<td>
-            <img src="fons20px.jpg" class="cell" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"/>
+            <img src="/fons20px.jpg" data-mina="false" style="width:20px; height:20px" class="cell" data-x="${i}" data-y="${j}" data-mina="false" onclick="obreCasella(event)"/>
             </td>`;
         }
-        `</tr>`
+        htmlContent += "</tr>";
     }
-    `</tbody>`
-
+    htmlContent += "</table>";
     taulell.innerHTML = htmlContent;
 
     setMines();    
@@ -114,8 +113,7 @@ function esMina(x,y){
 
     if(cell.dataset.mina === 'true'){
         console.log("HI HA MINA: " + x, y);
-        cell.innerHTML.
-        acabat();
+        acabat(guanyat);
         return cell.dataset.mina === 'true';
     }
     else{
@@ -130,10 +128,9 @@ function setMinesAdjacents(x, y){
 }
 
 function acabat(guanyat){
-    if(guanyat){
+    if (guanyat) {
         console.log("has guanyat");
-    }
-    else{
+    } else {
         console.log("has perdut");
     }
     //AQUI LLAVORS DONCS, AQUI NO SÉ QUE HEM DE POSAR EXACTAMENT. 
