@@ -13,18 +13,6 @@ let minesPositions = [];
 
 let guanyat=false;
 
-//let cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
-//let cells = document.querySelectorAll('.cell');
-
-/* -------------CANVIAR IMATGE NO EM SURT--------------
-
-let cell = document.querySelectorAll('.cell');
-cell.onclick = function(){
-    cellimg.src = "./bandera20px.jpg";
-}
-*/
-
-
 function iniciarPartida(){
     //RESET DE VARIABLES. 
     minesPositions = []; 
@@ -39,8 +27,6 @@ function iniciarPartida(){
     // NUM COLUMNES.
     numCols = Math.max(numMin, Math.min(numMax, parseInt(numCols))) || numMin;
 
-    //console.log("NUM FILES: " + numRows);
-    //console.log("NUM COLS: " + numCols);
 
     crearTaulell();
     if(guanyat=='true'){
@@ -77,7 +63,6 @@ function obreCasella(event) {
     y = parseInt(clickedCell.dataset.y);
 
     console.log("CLICK A " + x + ", " + y );
-    //esMina(x,y);
     esMina(x, y);
 }
 
@@ -104,19 +89,20 @@ function setMines(){
     console.log("TOTES LES MINES: ", minesPositions);
 }
 
-function calculaAdjacents(){
-    const cells = document.querySelectorAll('.cell');
-    
-}
-
+/*--esMina: HI HA LA LOGICA PERO NO CONSEGUEIXO LA IMATGE--*/
 function esMina(x,y){
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 
+    /* -------------CANVIAR IMATGE NO EM SURT--------------*/
     if(cell.dataset.mina === 'true'){
         console.log("HI HA MINA: " + x, y);
+        //cell.src = "./mina20px.jpg";
         //const imgElement = cell.querySelector('img');
-        //imgElement.src = "mina20px.jpg";
+        //cell.src = "mina20px.jpg";
+        //cell.innerHTML = '<img src="mina20px.jpg">';
+        guanyat=false;
         acabat(guanyat);
+        iniciarPartida();
         return cell.dataset.mina === 'true';
     }
     else{
@@ -126,17 +112,23 @@ function esMina(x,y){
     }
 }
 
+/*--SETMINES I CALCULA ADJ NO ESTA ACABAT-*/
+
+function calculaAdjacents(){
+    const cells = document.querySelectorAll('.cell');
+    
+}
+
 function setMinesAdjacents(x, y){
     const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
 }
 
 function acabat(guanyat){
     if (guanyat) {
-        console.log("has guanyat");
+        console.log("HAS GUANYAT");
     } else {
-        console.log("has perdut");
+        console.log("HAS PERDUT");
     }
-    //AQUI LLAVORS DONCS, AQUI NO SÉ QUE HEM DE POSAR EXACTAMENT. 
 }
 
 /*
